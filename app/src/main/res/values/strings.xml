@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHubMu</string>
+    <string name="search_hint">Find awesome GitHub user</string>
 </resources>

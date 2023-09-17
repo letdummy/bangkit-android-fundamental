@@ -3,5 +3,8 @@
     <style name="Base.Theme.GitHubMu" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryDark">@color/dark_secondary</item>
+        <item name="colorAccent">@color/dark_accent</item>
     </style>
 </resources>

@@ -3,6 +3,10 @@
     <style name="Base.Theme.GitHubMu" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimaryDark">@color/light_secondary</item>
+        <item name="colorAccent">@color/light_accent</item>
+
     </style>
 
     <style name="Theme.GitHubMu" parent="Base.Theme.GitHubMu" />

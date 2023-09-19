@@ -1,7 +1,8 @@
 package com.sekalisubmit.githubmu.data.retrofit
 
-import com.sekalisubmit.githubmu.data.response.GitHubOrgResponse
+import com.sekalisubmit.githubmu.data.response.GitHubOrgResponseItem
 import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
+import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
 import com.sekalisubmit.githubmu.data.response.GitHubUserSearchResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -18,5 +19,11 @@ interface ApiService {
     ): Call<GitHubUserDetailResponse>
 
     @GET("orgs/dicodingacademy/members")
-    fun getOrgMembers(): Call<GitHubOrgResponse>
+    fun getOrgMembers(): Call<List<GitHubOrgResponseItem>>
+
+    @GET("users/{userId}/{target}")
+    fun getUserFollowers(
+        @Path("userId") userId: String,
+        @Path("target") target: String
+    ): Call<List<GitHubUserFollowResponseItem>>
 }

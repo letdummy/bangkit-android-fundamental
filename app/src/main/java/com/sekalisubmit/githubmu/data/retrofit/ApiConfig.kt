@@ -14,7 +14,7 @@ class ApiConfig {
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor { chain ->
                     val request = chain.request().newBuilder()
-                        .addHeader("Authorization", "Bearer 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")
+                        .addHeader("Authorization", "Bearer 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")
                         .build()
                     chain.proceed(request)
                 }

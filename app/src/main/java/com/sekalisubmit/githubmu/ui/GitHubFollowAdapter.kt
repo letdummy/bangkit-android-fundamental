@@ -13,19 +13,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.sekalisubmit.githubmu.R
-import com.sekalisubmit.githubmu.data.response.GitHubOrgResponseItem
+import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
 
-class GitHubHomeAdapter(
-    private val onClick: (GitHubOrgResponseItem) -> Unit
-) : ListAdapter<GitHubOrgResponseItem, GitHubHomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class GitHubFollowAdapter(
+    private val onClick: (GitHubUserFollowResponseItem) -> Unit
+) : ListAdapter<GitHubUserFollowResponseItem, GitHubFollowAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubOrgResponseItem>() {
-            override fun areItemsTheSame(oldItem: GitHubOrgResponseItem, newItem: GitHubOrgResponseItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GitHubUserFollowResponseItem>() {
+            override fun areItemsTheSame(oldItem: GitHubUserFollowResponseItem, newItem: GitHubUserFollowResponseItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: GitHubOrgResponseItem, newItem: GitHubOrgResponseItem): Boolean {
+            override fun areContentsTheSame(oldItem: GitHubUserFollowResponseItem, newItem: GitHubUserFollowResponseItem): Boolean {
                 return oldItem == newItem
             }
         }

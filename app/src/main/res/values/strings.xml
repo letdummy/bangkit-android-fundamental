@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GitHubMu</string>
     <string name="search_hint">Find awesome GitHub user</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="follower_tab">Followers</string>
+    <string name="following_tab">Following</string>
 </resources>

@@ -33,7 +33,8 @@ class GitHubUserAdapter(
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageList: ImageView = itemView.findViewById(R.id.list_image)
         val usernameList: TextView = itemView.findViewById(R.id.list_title)
-        val infoList: TextView = itemView.findViewById(R.id.list_info)
+        val list_followers: TextView = itemView.findViewById(R.id.list_followers)
+        val list_public_repos: TextView = itemView.findViewById(R.id.list_public_repos)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -51,10 +52,11 @@ class GitHubUserAdapter(
             .into(holder.imageList)
         holder.usernameList.text = user.login
         when (user.publicRepos){
-            0 -> holder.infoList.text = "No Repository"
-            1 -> holder.infoList.text = "${user.publicRepos} Repository"
-            else -> holder.infoList.text = "${user.publicRepos} Repositories"
+            0 -> holder.list_public_repos.text = "No Public Repo"
+            1 -> holder.list_public_repos.text = "${user.publicRepos} Public Repo"
+            else -> holder.list_public_repos.text = "${user.publicRepos} Public Repos"
         }
+        holder.list_followers.text = "${user.followers} Followers"
 
         holder.itemView.setOnClickListener {
             onClick(user)

@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class GitHubOrgResponse(
 
-	@field:SerializedName("GitHubOrgResponse")
 	val gitHubOrgResponse: List<GitHubOrgResponseItem?>? = null
+
 )
 
 data class GitHubOrgResponseItem(
@@ -65,5 +65,8 @@ data class GitHubOrgResponseItem(
 	val organizationsUrl: String? = null,
 
 	@field:SerializedName("public_repos")
-	var publicRepos: Int? = 0
+	var publicRepos: Int? = 0,
+
+	@field:SerializedName("followers")
+	var followers: Int? = 0
 )

@@ -43,6 +43,64 @@
             android:paddingEnd="0dp"
             />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintStart_toStartOf="@id/list_title"
+            card_view:layout_constraintTop_toBottomOf="@id/list_title"
+            android:layout_marginTop="8dp"
+            >
+
+            <ImageView
+                android:id="@+id/list_icon_people"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_people"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:id="@+id/list_followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="200214 Followers"
+                android:fontFamily="@font/quicksand_bold"
+                card_view:layout_constraintStart_toEndOf="@id/list_icon_people"
+                card_view:layout_constraintTop_toTopOf="@id/list_icon_people"
+                card_view:layout_constraintBottom_toBottomOf="@id/list_icon_people"
+                android:layout_marginStart="4dp"
+                />
+
+            <ImageView
+                android:id="@+id/list_icon_public"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_public_2"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@id/list_icon_people"
+                android:layout_marginStart="16dp"
+                />
+
+            <TextView
+                android:id="@+id/list_public_repos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="197 Public Repositories"
+                android:fontFamily="@font/quicksand_bold"
+                card_view:layout_constraintStart_toEndOf="@id/list_icon_public"
+                card_view:layout_constraintTop_toTopOf="@id/list_icon_public"
+                card_view:layout_constraintBottom_toBottomOf="@id/list_icon_public"
+                android:layout_marginStart="4dp"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/list_info"
             android:layout_width="0dp"
@@ -56,9 +114,11 @@
             card_view:layout_constraintStart_toStartOf="@+id/list_title"
             card_view:layout_constraintTop_toBottomOf="@+id/list_title"
             card_view:layout_constraintVertical_bias="0.0"
-            tools:text="36 Public Repo(s)"
             android:paddingStart="16dp"
             android:paddingEnd="0dp"/>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 

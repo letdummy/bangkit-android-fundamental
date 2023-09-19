@@ -26,5 +26,8 @@ data class ItemsItem(
 	val url: String? = null,
 
 	@field:SerializedName("public_repos")
-	var publicRepos: Int? = 0
+	var publicRepos: Int? = 0,
+
+	@field:SerializedName("followers")
+	var followers: Int? = 0
 )

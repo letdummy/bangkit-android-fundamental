@@ -59,12 +59,15 @@ class GitHubFollowAdapter(
             1 -> holder.list_public_repos.text = "${user.publicRepos} Public Repo"
             else -> holder.list_public_repos.text = "${user.publicRepos} Public Repos"
         }
-        holder.list_followers.text = "${user.followers} Followers"
+
+        when (user.followers){
+            0 -> holder.list_followers.text = "No Followers"
+            1 -> holder.list_followers.text = "${user.followers} Follower"
+            else -> holder.list_followers.text = "${user.followers} Followers"
+        }
 
         holder.itemView.setOnClickListener {
             onClick(user)
         }
     }
-
-
 }

@@ -66,5 +66,9 @@ class GitHubHomeAdapter(
         }
     }
 
-
+    fun submitLDList(userList: List<GitHubOrgResponseItem>?) {
+        userList?.let {
+            submitList(it)
+        }
+    }
 }

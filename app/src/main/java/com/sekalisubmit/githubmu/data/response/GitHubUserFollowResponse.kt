@@ -53,7 +53,7 @@ data class GitHubUserFollowResponseItem(
 	val id: Int? = null,
 
 	@field:SerializedName("public_repos")
-	var publicRepos: Int? = null,
+	var publicRepos: Int? = 0,
 
 	@field:SerializedName("gravatar_id")
 	val gravatarId: String? = null,
@@ -83,7 +83,7 @@ data class GitHubUserFollowResponseItem(
 	val receivedEventsUrl: String? = null,
 
 	@field:SerializedName("followers")
-	var followers: Int? = null,
+	var followers: Int? = 0,
 
 	@field:SerializedName("avatar_url")
 	val avatarUrl: String? = null,

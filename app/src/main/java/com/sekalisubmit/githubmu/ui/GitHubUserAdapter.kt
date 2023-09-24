@@ -35,6 +35,7 @@ class GitHubUserAdapter(
         val usernameList: TextView = itemView.findViewById(R.id.list_title)
         val list_followers: TextView = itemView.findViewById(R.id.list_followers)
         val list_public_repos: TextView = itemView.findViewById(R.id.list_public_repos)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

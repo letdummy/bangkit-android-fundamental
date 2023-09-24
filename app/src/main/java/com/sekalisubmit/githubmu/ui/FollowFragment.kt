@@ -1,13 +1,13 @@
 package com.sekalisubmit.githubmu.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.R
@@ -52,20 +52,20 @@ class FollowFragment : Fragment() {
 
         when (position) {
             0 -> {
-                adapter = GitHubFollowAdapter(onClick = { user ->
-                    val intent = Intent(activity, DetailUserActivity::class.java)
-                    intent.putExtra(DetailUserActivity.EXTRA_USER, user.login)
-                    startActivity(intent)
-                })
+                adapter = GitHubFollowAdapter{ user ->
+                    val action = DetailUserFragmentDirections.actionDetailUserFragmentSelf()
+                    action.userId = user.login.toString()
+                    findNavController().navigate(action)
+                }
                 binding.rvFollow.adapter = adapter
                 fetchGitHubUserFollow(username.toString(), "followers")
             }
             else -> {
-                adapter = GitHubFollowAdapter(onClick = { user ->
-                    val intent = Intent(activity, DetailUserActivity::class.java)
-                    intent.putExtra(DetailUserActivity.EXTRA_USER, user.login)
-                    startActivity(intent)
-                })
+                adapter = GitHubFollowAdapter{ user ->
+                    val action = DetailUserFragmentDirections.actionDetailUserFragmentSelf()
+                    action.userId = user.login.toString()
+                    findNavController().navigate(action)
+                }
                 binding.rvFollow.adapter = adapter
                 fetchGitHubUserFollow(username.toString(), "following")
             }

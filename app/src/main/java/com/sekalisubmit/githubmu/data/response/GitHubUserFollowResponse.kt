@@ -2,12 +2,6 @@ package com.sekalisubmit.githubmu.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GitHubUserFollowResponse(
-
-	val gitHubOrgResponse: List<GitHubUserFollowResponseItem?>? = null
-
-)
-
 data class GitHubUserFollowResponseItem(
 
 	@field:SerializedName("gists_url")

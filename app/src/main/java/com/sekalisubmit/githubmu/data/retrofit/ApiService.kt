@@ -1,6 +1,5 @@
 package com.sekalisubmit.githubmu.data.retrofit
 
-import com.sekalisubmit.githubmu.data.response.GitHubOrgResponseItem
 import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
 import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
 import com.sekalisubmit.githubmu.data.response.GitHubUserSearchResponse
@@ -17,9 +16,6 @@ interface ApiService {
     fun getUserDetail(
         @Path("userId") userId: String
     ): Call<GitHubUserDetailResponse>
-
-    @GET("orgs/dicodingacademy/members")
-    fun getOrgMembers(): Call<List<GitHubOrgResponseItem>>
 
     @GET("users/{userId}/{target}")
     fun getUserFollowers(

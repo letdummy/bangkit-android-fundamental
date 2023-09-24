@@ -1,9 +1,10 @@
-package com.sekalisubmit.githubmu.ui
+package com.sekalisubmit.githubmu.ui.adapter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.sekalisubmit.githubmu.ui.fragment.FollowFragment
 
 class PagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     var username: String = ""

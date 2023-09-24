@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.HomeFragment"
+    tools:context=".ui.fragment.HomeFragment"
     android:orientation="vertical"
-    android:background="@color/light_primary"
+    android:background="@color/primary"
     android:padding="16dp">
 
     <!--  I prefer to use constraint layout over toolbar  -->
@@ -27,20 +27,8 @@
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/light_text"
+            android:textColor="@color/text"
             />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:src="@drawable/icon_settings"
-            android:background="@android:color/transparent"
-            android:id="@+id/btn_setting"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Setting" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -58,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/search_hint"
-            android:backgroundTint="@color/light_secondary"
+            android:backgroundTint="@color/secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

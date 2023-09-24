@@ -1,4 +1,4 @@
-package com.sekalisubmit.githubmu.ui
+package com.sekalisubmit.githubmu.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,9 +17,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-//    private val _userListOrg = MutableLiveData<List<GitHubOrgResponseItem>>()
-//    val userListOrg: LiveData<List<GitHubOrgResponseItem>> get() = _userListOrg
-
     private val _userListSearch = MutableLiveData<List<ItemsItem?>>()
     val userListSearch: MutableLiveData<List<ItemsItem?>> get() = _userListSearch
 
@@ -27,7 +24,7 @@ class MainViewModel: ViewModel() {
     val loading: LiveData<Boolean> get() = _loading
 
     init {
-        fetchGitHubUserSearch("adam")
+        fetchGitHubUserSearch("ardi")
     }
 
     companion object {
@@ -60,7 +57,7 @@ class MainViewModel: ViewModel() {
                     }
 
                     CoroutineScope(Dispatchers.Main).launch {
-                        delay(700)
+                        delay(1000)
                         // idk why but add delay make fetch work properly
                         // if you try below 700 it will bug giving 0 public repos sometimes
                         _userListSearch.value = usersToFetch
@@ -114,44 +111,4 @@ class MainViewModel: ViewModel() {
             }
         })
     }
-
-//    private fun fetchGitHubOrganizationData() {
-//        _loading.value = true
-//        val apiService = ApiConfig.getApiService()
-//        val call = apiService.getOrgMembers()
-//
-//        call.enqueue(object : Callback<List<GitHubOrgResponseItem>> {
-//            override fun onResponse(
-//                call: Call<List<GitHubOrgResponseItem>>,
-//                response: Response<List<GitHubOrgResponseItem>>
-//            ) {
-//                if (response.isSuccessful) {
-//                    val orgList = response.body() ?: emptyList()
-//
-//                    for (user in orgList){
-//                        user?.login?.let { userId ->
-//                            fetchGithubUserDetail(userId) { userDetailInfo ->
-//                                val userItem = orgList.find { it?.login == userId }
-//                                userItem?.publicRepos = userDetailInfo.publicRepos
-//                                userItem?.followers = userDetailInfo.followers
-//                            }
-//                        }}
-//                    CoroutineScope(Dispatchers.Main).launch {
-//                        delay(700)
-//                        // idk why but add delay make fetch work properly
-//                        // if you try below 700 it will bug giving 0 public repos sometimes
-//                        _userListOrg.value = orgList
-//                        _loading.value = false
-//                        // set the loading to false after submitList so that user wouldn't notice the delay
-//                    }
-//                } else {
-//                    Log.e(TAG, "onFailure: ${response.message()}")
-//                }
-//            }
-//            override fun onFailure(call: Call<List<GitHubOrgResponseItem>>, t: Throwable) {
-//                _loading.value = false
-//                Log.e(TAG, "onFailure: ${t.message}")
-//            }
-//        })
-//    }
 }

@@ -1,4 +1,4 @@
-package com.sekalisubmit.githubmu.ui
+package com.sekalisubmit.githubmu.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

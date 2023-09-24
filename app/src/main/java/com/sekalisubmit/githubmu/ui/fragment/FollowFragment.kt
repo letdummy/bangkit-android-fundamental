@@ -1,13 +1,14 @@
-package com.sekalisubmit.githubmu.ui
+package com.sekalisubmit.githubmu.ui.fragment
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.R
@@ -15,8 +16,9 @@ import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
 import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
 import com.sekalisubmit.githubmu.data.retrofit.ApiConfig
 import com.sekalisubmit.githubmu.databinding.FragmentFollowBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.sekalisubmit.githubmu.ui.DetailUserActivity
+import com.sekalisubmit.githubmu.ui.adapter.GitHubFollowAdapter
+import com.sekalisubmit.githubmu.ui.viewmodel.FollowViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -24,9 +26,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowFragment : Fragment() {
+    companion object {
+        const val ARG_POSITION: String = "position"
+        const val ARG_USERNAME: String = "username"
+        private const val TAG = "FollowFragment"
+    }
 
     private lateinit var binding: FragmentFollowBinding
     private lateinit var adapter: GitHubFollowAdapter
+    private lateinit var viewModel: FollowViewModel
 
     data class UserDetailInfo(val publicRepos: Int, val followers: Int)
 
@@ -37,52 +45,51 @@ class FollowFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_follow, container, false)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFollowBinding.bind(view)
+
+        viewModel = ViewModelProvider(this)[FollowViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(activity)
         binding.rvFollow.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(activity, layoutManager.orientation)
         binding.rvFollow.addItemDecoration(itemDecoration)
 
+        adapter = GitHubFollowAdapter(onClick = { user ->
+            val intent = Intent(activity, DetailUserActivity::class.java)
+            intent.putExtra(DetailUserActivity.EXTRA_USER, user.login)
+            startActivity(intent)
+        })
+        binding.rvFollow.adapter = adapter
+
         val position = arguments?.getInt(ARG_POSITION)
         val username = arguments?.getString(ARG_USERNAME)
 
-        when (position) {
-            0 -> {
-                adapter = GitHubFollowAdapter{ user ->
-                    val action = DetailUserFragmentDirections.actionDetailUserFragmentSelf()
-                    action.userId = user.login.toString()
-                    findNavController().navigate(action)
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading){
+                when (position) {
+                    0 -> {
+                        fetchGitHubUserFollow(username.toString(), "followers")
+                    }
+                    else -> {
+                        fetchGitHubUserFollow(username.toString(), "following")
+                    }
                 }
-                binding.rvFollow.adapter = adapter
-                fetchGitHubUserFollow(username.toString(), "followers")
-            }
-            else -> {
-                adapter = GitHubFollowAdapter{ user ->
-                    val action = DetailUserFragmentDirections.actionDetailUserFragmentSelf()
-                    action.userId = user.login.toString()
-                    findNavController().navigate(action)
-                }
-                binding.rvFollow.adapter = adapter
-                fetchGitHubUserFollow(username.toString(), "following")
             }
         }
-    }
 
-    companion object {
-        const val ARG_POSITION: String = "position"
-        const val ARG_USERNAME: String = "username"
-        private const val TAG = "FollowFragment"
+        viewModel.userListFollow.observe(viewLifecycleOwner) { userList ->
+            adapter.submitList(userList)
+            viewModel.setLoading(false)
+        }
+
     }
 
     private fun fetchGitHubUserFollow(userId: String, target: String){
-        showLoading(true)
         val apiService = ApiConfig.getApiService()
         val call = apiService.getUserFollowers(userId, target)
-
+        showLoading(true)
         call.enqueue(object : Callback<List<GitHubUserFollowResponseItem>>{
             override fun onResponse(
                 call: Call<List<GitHubUserFollowResponseItem>>,
@@ -104,14 +111,15 @@ class FollowFragment : Fragment() {
                         }
                     }
 
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(700)
-                        // idk why but add delay make fetch work properly
-                        // if you try below 700 it will bug giving 0 public repos sometimes
+                    // okay, so basically if I put under 1000 ms delay,
+                    // chance to get bug 0 value is really high
+                    lifecycleScope.launch {
+                        delay(1000)
                         adapter.submitList(usersToFetch)
                         showLoading(false)
-                        // set the loading to false after submitList so that user wouldn't notice the delay
+                        viewModel.setUserListFollow(response.body())
                     }
+
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

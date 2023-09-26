@@ -86,13 +86,21 @@ class DetailUserActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(userDetail: GitHubUserDetailResponse) {
-        binding.detailLogin.text = userDetail.login
+        binding.detailUsername.text = userDetail.login
+        binding.detailName.text = userDetail.name
+        if (userDetail.location == null) {
+            binding.detailLocation.text = "No Location"
+        } else {
+            binding.detailLocation.text = userDetail.location
+        }
         binding.detailFollowers.text = "${userDetail.followers} Followers"
         binding.detailFollowing.text = "${userDetail.following} Following"
         Glide.with(this@DetailUserActivity)
             .load(userDetail.avatarUrl)
+            .circleCrop()
             .into(binding.detailImage)
         binding.separate.text = "|"
         binding.detailIcon.setImageResource(R.drawable.icon_people)
+        binding.detailIconLocation.setImageResource(R.drawable.icon_home)
     }
 }

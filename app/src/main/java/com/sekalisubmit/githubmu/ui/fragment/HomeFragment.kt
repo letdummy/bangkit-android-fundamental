@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.databinding.FragmentHomeBinding
@@ -20,58 +22,63 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapterSearch: GitHubUserAdapter
-
     private lateinit var viewModel: MainViewModel
+    private val navController by lazy { findNavController() }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         val view = binding.root
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
+        setupRecyclerView()
+        setupSearchView()
+
+        binding.btnFav.setOnClickListener {
+            navController.navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
         }
 
-        with(binding) {
-            searchView.setupWithSearchBar(searchBar)
-            searchView
-                .editText
-                .setOnEditorActionListener { _, _, _ ->
-                    searchBar.text = searchView.text
-                    searchView.hide()
-                    viewModel.fetchGitHubUserSearch(searchView.text.toString())
-                    viewModel.userListSearch.observe(viewLifecycleOwner) { userList ->
-                        adapterSearch.submitList(userList)
-                    }
-                    binding.rvHome.adapter = adapterSearch
-                    false
-                }
-        }
+        return view
+    }
 
-        val layoutManager = LinearLayoutManager(context)
-        binding.rvHome.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(context, layoutManager.orientation)
-        binding.rvHome.addItemDecoration(itemDecoration)
-
+    private fun setupRecyclerView() {
         adapterSearch = GitHubUserAdapter { user ->
-            val moveIntent = Intent(context, DetailUserActivity::class.java)
+            val moveIntent = Intent(requireContext(), DetailUserActivity::class.java)
             moveIntent.putExtra(DetailUserActivity.EXTRA_USER, user.login)
             startActivity(moveIntent)
         }
 
-        viewModel.userListSearch.observe(viewLifecycleOwner) { userList ->
-            adapterSearch.submitList(userList)
-        }
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHome.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding.rvHome.addItemDecoration(itemDecoration)
 
         binding.rvHome.adapter = adapterSearch
-        return view
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setupWithSearchBar(binding.searchBar)
+        binding.searchView.editText.setOnEditorActionListener { _, _, _ ->
+            binding.searchBar.text = binding.searchView.text
+            binding.searchView.hide()
+            viewModel.fetchGitHubUserSearch(binding.searchView.text.toString())
+            return@setOnEditorActionListener false
+        }
+
+        viewModel.userListSearch.observe(viewLifecycleOwner, Observer { userList ->
+            adapterSearch.submitList(userList)
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

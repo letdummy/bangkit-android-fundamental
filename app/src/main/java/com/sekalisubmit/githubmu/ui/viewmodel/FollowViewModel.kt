@@ -3,7 +3,7 @@ package com.sekalisubmit.githubmu.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
 
 class FollowViewModel: ViewModel() {
 

@@ -12,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.R
-import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
-import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
-import com.sekalisubmit.githubmu.data.retrofit.ApiConfig
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserDetailResponse
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
+import com.sekalisubmit.githubmu.data.remote.retrofit.ApiConfig
 import com.sekalisubmit.githubmu.databinding.FragmentFollowBinding
 import com.sekalisubmit.githubmu.ui.DetailUserActivity
 import com.sekalisubmit.githubmu.ui.adapter.GitHubFollowAdapter

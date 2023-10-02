@@ -1,8 +1,8 @@
-package com.sekalisubmit.githubmu.data.retrofit
+package com.sekalisubmit.githubmu.data.remote.retrofit
 
-import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
-import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
-import com.sekalisubmit.githubmu.data.response.GitHubUserSearchResponse
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserDetailResponse
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserSearchResponse
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.sekalisubmit.githubmu.R
-import com.sekalisubmit.githubmu.data.response.GitHubUserFollowResponseItem
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
 
 class GitHubFollowAdapter(
     private val onClick: (GitHubUserFollowResponseItem) -> Unit

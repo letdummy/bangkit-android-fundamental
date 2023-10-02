@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sekalisubmit.githubmu.data.response.GitHubUserDetailResponse
-import com.sekalisubmit.githubmu.data.response.GitHubUserSearchResponse
-import com.sekalisubmit.githubmu.data.response.ItemsItem
-import com.sekalisubmit.githubmu.data.retrofit.ApiConfig
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserDetailResponse
+import com.sekalisubmit.githubmu.data.remote.response.GitHubUserSearchResponse
+import com.sekalisubmit.githubmu.data.remote.response.ItemsItem
+import com.sekalisubmit.githubmu.data.remote.retrofit.ApiConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -62,7 +62,6 @@ class MainViewModel: ViewModel() {
                         // if you try below 700 it will bug giving 0 public repos sometimes
                         _userListSearch.value = usersToFetch
                         _loading.value = false
-                        // set the loading to false after submitList so that user wouldn't notice the delay
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

@@ -13,18 +13,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.sekalisubmit.githubmu.R
-import com.sekalisubmit.githubmu.data.remote.response.ItemsItem
+import com.sekalisubmit.githubmu.data.local.room.Favs
 
-class GitHubUserAdapter(
-    private val onClick: (ItemsItem) -> Unit
-) : ListAdapter<ItemsItem, GitHubUserAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class FavoriteAdapter(
+    private val onClick: (Favs) -> Unit
+) : ListAdapter<Favs, FavoriteAdapter.MyViewHolder>(DIFF_CALLBACK) {
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemsItem>() {
-            override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
-                return oldItem == newItem
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Favs>() {
+            override fun areItemsTheSame(oldItem: Favs, newItem: Favs): Boolean {
+                return oldItem.login == newItem.login // Assuming id is a unique identifier for your Favs
             }
 
-            override fun areContentsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(oldItem: Favs, newItem: Favs): Boolean {
                 return oldItem == newItem
             }
         }
@@ -35,7 +36,6 @@ class GitHubUserAdapter(
         val usernameList: TextView = itemView.findViewById(R.id.list_title)
         val list_followers: TextView = itemView.findViewById(R.id.list_followers)
         val list_public_repos: TextView = itemView.findViewById(R.id.list_public_repos)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -44,7 +44,7 @@ class GitHubUserAdapter(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder:MyViewHolder, position: Int) {
         val user = getItem(position)
         Glide.with(holder.itemView.context)
             .load(user.avatarUrl)

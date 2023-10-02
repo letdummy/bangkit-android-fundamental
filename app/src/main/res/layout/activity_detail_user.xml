@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        android:contentDescription="@string/user_pp" />
 
     <TextView
         android:id="@+id/detail_name"
@@ -42,6 +42,19 @@
         android:layout_marginStart="20dp"
         />
 
+    <ImageButton
+        android:id="@+id/setFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_fav_false"
+        android:background="@drawable/circle_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="30dp"
+        android:padding="16dp"
+        android:elevation="8dp"
+        android:contentDescription="@string/user_fav"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,7 +72,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.08"
-            />
+            android:contentDescription="@string/user_loc" />
 
         <TextView
             android:id="@+id/detail_location"
@@ -92,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.08"
-            />
+            android:contentDescription="@string/user_fol" />
 
         <TextView
             android:id="@+id/detail_followers"
@@ -140,6 +153,7 @@
         app:tabIndicatorColor="@color/accent"
         android:layout_marginTop="18dp"
         android:background="@color/primary"
+        android:contentDescription="@string/user_tabs"
         />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -149,16 +163,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         />
 
-
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.16"
+        app:layout_constraintVertical_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />

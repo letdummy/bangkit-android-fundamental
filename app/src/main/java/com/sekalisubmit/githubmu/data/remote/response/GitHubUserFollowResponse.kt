@@ -1,4 +1,4 @@
-package com.sekalisubmit.githubmu.data.response
+package com.sekalisubmit.githubmu.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

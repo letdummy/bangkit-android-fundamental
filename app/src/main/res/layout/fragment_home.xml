@@ -25,10 +25,36 @@
             android:fontFamily="@font/quicksand_bold"
             android:textSize="24sp"
             android:gravity="center"
+            android:paddingHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/text"
             />
+
+        <ImageButton
+            android:id="@+id/btnFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_fav_true"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@id/btnSetting"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="8dp"
+            android:contentDescription="@string/tombol_favorite"
+            />
+
+        <ImageButton
+            android:id="@+id/btnSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_setting"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="8dp"
+            android:contentDescription="@string/tombol_setting"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

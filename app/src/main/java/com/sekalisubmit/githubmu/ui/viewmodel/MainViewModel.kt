@@ -23,6 +23,9 @@ class MainViewModel: ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
+    private val _isEmpty = MutableLiveData<Boolean>()
+    val isEmpty: LiveData<Boolean> get() = _isEmpty
+
     init {
         fetchGitHubUserSearch("ardi")
     }
@@ -44,7 +47,11 @@ class MainViewModel: ViewModel() {
                     val searchResponse = response.body()
                     val userList = searchResponse?.items ?: emptyList()
 
-                    val usersToFetch = userList.take(15)
+                    val usersToFetch: List<ItemsItem?> = if (userList.size > 15){
+                        userList.take(15)
+                    } else {
+                        userList
+                    }
 
                     for (user in usersToFetch) {
                         user?.login?.let { userId ->
@@ -60,6 +67,7 @@ class MainViewModel: ViewModel() {
                         delay(1000)
                         // idk why but add delay make fetch work properly
                         // if you try below 700 it will bug giving 0 public repos sometimes
+                        _isEmpty.value = userList.isEmpty()
                         _userListSearch.value = usersToFetch
                         _loading.value = false
                     }

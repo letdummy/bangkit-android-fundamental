@@ -16,7 +16,7 @@ import com.sekalisubmit.githubmu.data.remote.response.GitHubUserDetailResponse
 import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
 import com.sekalisubmit.githubmu.data.remote.retrofit.ApiConfig
 import com.sekalisubmit.githubmu.databinding.FragmentFollowBinding
-import com.sekalisubmit.githubmu.ui.DetailUserActivity
+import com.sekalisubmit.githubmu.ui.activity.DetailUserActivity
 import com.sekalisubmit.githubmu.ui.adapter.GitHubFollowAdapter
 import com.sekalisubmit.githubmu.ui.viewmodel.FollowViewModel
 import kotlinx.coroutines.delay
@@ -102,7 +102,7 @@ class FollowFragment : Fragment() {
                     val usersToFetch = userList.take(20)
 
                     for (user in usersToFetch) {
-                        user?.login?.let { userId ->
+                        user.login?.let { userId ->
                             fetchGithubUserDetail(userId) { userDetailInfo ->
                                 val userItem = userList.find { it?.login == userId }
                                 userItem?.publicRepos = userDetailInfo.publicRepos

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DetailUserActivity"
-    android:background="@color/primary">
+    tools:context=".ui.activity.DetailUserActivity"
+    android:background="?android:attr/colorPrimary">
 
     <ImageView
         android:id="@+id/detail_image"
@@ -23,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/quicksand_bold"
-        android:textColor="@color/text"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="@+id/detail_image"
         app:layout_constraintStart_toEndOf="@+id/detail_image"
@@ -35,7 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/quicksand_regular"
-        android:textColor="@color/text"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/detail_name"
         app:layout_constraintStart_toEndOf="@+id/detail_image"
@@ -80,7 +78,6 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="@font/quicksand_bold"
-            android:textColor="@color/text"
             android:layout_marginStart="40dp"
             app:layout_constraintStart_toStartOf="@+id/detail_icon_location"
             app:layout_constraintTop_toTopOf="parent"
@@ -113,7 +110,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
             android:textSize="16sp"
-            android:textColor="@color/text"
             android:layout_marginStart="40dp"
             app:layout_constraintStart_toStartOf="@+id/detail_icon"
             app:layout_constraintTop_toTopOf="parent"
@@ -124,7 +120,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@color/text"
             android:fontFamily="@font/quicksand_bold"
             app:layout_constraintStart_toEndOf="@+id/detail_followers"
             app:layout_constraintTop_toTopOf="parent"
@@ -137,7 +132,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
             android:textSize="16sp"
-            android:textColor="@color/text"
             app:layout_constraintStart_toEndOf="@+id/separate"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="5dp"
@@ -148,12 +142,12 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@color/text"
         app:layout_constraintTop_toBottomOf="@id/detail_followers_following"
-        app:tabIndicatorColor="@color/accent"
+        app:tabIndicatorColor="?android:attr/colorButtonNormal"
         android:layout_marginTop="18dp"
-        android:background="@color/primary"
+        android:background="?android:attr/colorPrimary"
         android:contentDescription="@string/user_tabs"
+        app:tabTextColor="?android:attr/colorControlNormal"
         />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -174,6 +168,7 @@
         app:layout_constraintVertical_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="?android:attr/colorButtonNormal"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.FavoriteFragment"
     android:orientation="vertical"
-    android:background="@color/primary"
+    android:background="?android:attr/colorPrimary"
     android:padding="16dp">
 
     <!--  I prefer to use constraint layout over toolbar  -->
@@ -28,7 +28,6 @@
             android:paddingHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/text"
             />
 
         <ImageButton
@@ -90,7 +89,6 @@
             android:paddingHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/octodex"
-            android:textColor="@color/text"
             android:visibility="visible"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

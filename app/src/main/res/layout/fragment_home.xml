@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.HomeFragment"
     android:orientation="vertical"
-    android:background="@color/primary"
+    android:background="?android:attr/colorPrimary"
     android:padding="16dp">
 
     <!--  I prefer to use constraint layout over toolbar  -->
@@ -28,7 +28,6 @@
             android:paddingHorizontal="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/text"
             />
 
         <ImageButton
@@ -72,7 +71,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/search_hint"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="?android:attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -86,7 +85,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
         </com.google.android.material.search.SearchView>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -96,6 +96,46 @@
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
             tools:listitem="@layout/item_user"
+            android:visibility="visible"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/octodex"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/octodex"
+            android:contentDescription="@string/not_found"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_user"
+            android:fontFamily="@font/quicksand_bold"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/octodex"
+            android:visibility="visible"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,5 +149,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="?android:attr/colorButtonNormal"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

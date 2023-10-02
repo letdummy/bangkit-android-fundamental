@@ -1,4 +1,4 @@
-package com.sekalisubmit.githubmu.ui
+package com.sekalisubmit.githubmu.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -106,7 +106,11 @@ class DetailUserActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun updateUI(userDetail: GitHubUserDetailResponse) {
         binding.detailUsername.text = userDetail.login
-        binding.detailName.text = userDetail.name
+        if (userDetail.name == null) {
+            binding.detailName.text = userDetail.login
+        } else {
+            binding.detailName.text = userDetail.name
+        }
         if (userDetail.location == null) {
             binding.detailLocation.text = "No Location"
         } else {

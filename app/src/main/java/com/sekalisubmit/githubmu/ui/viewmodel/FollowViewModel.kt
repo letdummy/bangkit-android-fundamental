@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.sekalisubmit.githubmu.data.remote.response.GitHubUserFollowResponseItem
 
 class FollowViewModel: ViewModel() {
+    data class UserDetailInfo(val publicRepos: Int, val followers: Int)
 
     private val _userListFollow = MutableLiveData<List<GitHubUserFollowResponseItem>?>()
     val userListFollow: MutableLiveData<List<GitHubUserFollowResponseItem>?> get() = _userListFollow
@@ -20,8 +21,8 @@ class FollowViewModel: ViewModel() {
     fun setLoading(isLoading: Boolean) {
         _loading.value = isLoading
     }
+
     init {
         setLoading(true)
     }
-
 }

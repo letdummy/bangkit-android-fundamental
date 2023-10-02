@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.databinding.FragmentHomeBinding
-import com.sekalisubmit.githubmu.ui.DetailUserActivity
+import com.sekalisubmit.githubmu.ui.activity.DetailUserActivity
 import com.sekalisubmit.githubmu.ui.adapter.GitHubUserAdapter
 import com.sekalisubmit.githubmu.ui.viewmodel.MainViewModel
 
@@ -37,8 +36,22 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupSearchView()
 
+        viewModel.isEmpty.observe(viewLifecycleOwner) { isEmpty ->
+            if (isEmpty) {
+                binding.searchEmpty.visibility = View.VISIBLE
+                binding.rvHome.visibility = View.GONE
+            } else {
+                binding.searchEmpty.visibility = View.GONE
+                binding.rvHome.visibility = View.VISIBLE
+            }
+        }
+
         binding.btnFav.setOnClickListener {
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
+        }
+
+        binding.btnSetting.setOnClickListener {
+            navController.navigate(HomeFragmentDirections.actionHomeFragmentToSettingFragment())
         }
 
         return view
@@ -65,16 +78,17 @@ class HomeFragment : Fragment() {
             binding.searchBar.text = binding.searchView.text
             binding.searchView.hide()
             viewModel.fetchGitHubUserSearch(binding.searchView.text.toString())
+
             return@setOnEditorActionListener false
         }
 
-        viewModel.userListSearch.observe(viewLifecycleOwner, Observer { userList ->
+        viewModel.userListSearch.observe(viewLifecycleOwner) { userList ->
             adapterSearch.submitList(userList)
-        })
+        }
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        })
+        }
     }
 
     override fun onDestroyView() {

@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sekalisubmit.githubmu.databinding.FragmentFavoriteBinding
-import com.sekalisubmit.githubmu.ui.DetailUserActivity
+import com.sekalisubmit.githubmu.ui.activity.DetailUserActivity
 import com.sekalisubmit.githubmu.ui.adapter.FavoriteAdapter
 import com.sekalisubmit.githubmu.ui.viewmodel.FavoriteViewModel
 import com.sekalisubmit.githubmu.ui.viewmodel.ViewModelFactory
@@ -25,13 +26,13 @@ class FavoriteFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity().application)
     }
 
+    private val navController by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
-        val view = binding.root
 
         adapterFav = FavoriteAdapter { user ->
             val moveIntent = Intent(requireContext(), DetailUserActivity::class.java)
@@ -59,6 +60,10 @@ class FavoriteFragment : Fragment() {
 
         binding.rvFavorite.adapter = adapterFav
 
-        return view
+        binding.btnSetting.setOnClickListener{
+            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToSettingFragment())
+        }
+
+        return binding.root
     }
 }
